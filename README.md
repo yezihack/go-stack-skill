@@ -9,7 +9,7 @@
 
 ## Quick Start (English)
 
-Requires Node.js >= 22.20.
+Requires Node.js >= 22.20.0.
 
 ```bash
 npx skills add yezihack/go-stack-skill
