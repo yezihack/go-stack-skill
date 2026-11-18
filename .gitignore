@@ -1,0 +1,11 @@
+# Local agent state — never publish
+.codebuddy/
+
+# CodeBuddy import metadata and editor backups
+**/_user_meta.json
+**/SKILL.md.bak
+*.bak
+
+# OS noise
+.DS_Store
+Thumbs.db
