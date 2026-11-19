@@ -44,6 +44,7 @@ Wails v2 关键约定：
 | 命令行 | `spf13/cobra` | CLI 命令组织 |
 | 日志 | `rs/zerolog` | 结构化日志，不用标准库 log 或 logrus |
 | ORM | `go-gorm/gorm` 或 `uptrace/bun` | 二选一；bun 更贴近原生 SQL，gorm 更主流易上手，无特殊需求默认选 gorm |
+| SQLite 驱动 | [`ncruces/go-sqlite3`](https://github.com/ncruces/go-sqlite3) | 仅在使用 SQLite 时采用；基于 wasm2go、无 CGO，禁止使用依赖 CGO 的 SQLite 驱动 |
 | Redis | `redis/go-redis` | |
 | JSON 序列化 | `bytedance/sonic` | 高性能场景替代标准库 encoding/json |
 | 参数校验 | `go-playground/validator` | 配合 struct tag |
@@ -150,6 +151,7 @@ Wails v2 关键约定：
 编码或建议时如果出现以下情况，视为违反本规范，需要改正：
 
 - ❌ 使用 Wails v3 而不是 v2
+- ❌ 使用 SQLite 时采用依赖 CGO 的驱动；统一使用 `ncruces/go-sqlite3`
 - ❌ 用 Element UI 而不是 Element Plus
 - ❌ 用 Vuex 而不是 Pinia
 - ❌ 用 React 而不是 Vue3

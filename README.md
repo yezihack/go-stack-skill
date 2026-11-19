@@ -27,6 +27,16 @@ Or paste this into any agent that can read the web and run commands:
 
 **Agent instruction:** read this README's Install section first, then run the installer. If the installer is unavailable or your agent is not supported, copy `skills/<name>/` into your own skills directory. Do not clone the repository into the user's current project.
 
+## Why this stack
+
+Coding agents have no cross-session memory of your project, so every session re-decides which libraries to use. This bundle replaces that decision with a convention the agent reads before writing code.
+
+- **One answer per concern.** Gin, Vue3, Pinia, Element Plus, zerolog, GORM, validator — written once in `SKILL.md` and loaded before any scaffolding, component or dependency choice.
+- **Forbidden lists work better than recommendations.** Each skill ends with an explicit "do not" table: no React, no Vuex, no Element UI, no Wails in the web stack, no Wails v3 in the desktop stack, no Node or Nginx required at runtime. Agents follow prohibitions more reliably than preferences.
+- **Unknown capabilities require research.** Anything the list does not cover triggers a mandatory search: GitHub plus web, at least two candidates compared on stars, last commit, community references and license, then a written comparison before the dependency is added. If the best candidate falls below the bar, the agent stops and asks.
+- **Deployment shape is part of the stack.** The frontend belongs to the program, so it is embedded with `go:embed`. Configuration belongs to the environment, so it stays an external YAML file. The result is one executable plus one config file.
+- **Not in scope.** Covering every Go project, or generating scaffolds. When a need is listed the answer is fixed; when it is not, the flow above decides.
+
 ## 一行安装
 
 对任意能读网页、能执行命令的 agent 说：
@@ -89,6 +99,18 @@ npx skills add yezihack/go-stack-skill --skill go-wails-stack
 ```bash
 npx skills update
 ```
+
+## 为什么是这套选型
+
+AI 编码 agent 没有跨会话的项目记忆，每次动手都在重新推断「这个项目该用什么库」。本仓库把这个推断换成一份动手前必须遵守的规范。
+
+![没有 Skill 与装了 Skill 的对比](./docs/assets/why-compare.svg)
+
+- **一个关注点只有一个答案。** Gin、Vue3、Pinia、Element Plus、zerolog、GORM、validator 只在 `SKILL.md` 里写一次，生成代码、组件或选依赖前先加载。
+- **禁止清单比推荐清单有效。** 每个技能末尾都有一张明确的「不要做」表：不用 React、不用 Vuex、不用 Element UI、Web 项目不用 Wails、桌面项目不用 Wails v3、生产环境不依赖 Node 与 Nginx。agent 对禁止项的遵守度明显高于对偏好的遵守度。
+- **清单外能力必须先调研。** 清单未覆盖的能力会强制走检索流程：GitHub 与搜索引擎检索、至少比较两个候选、按 star 数 / 最近提交 / 社区推荐 / License 量化筛选，输出对比表后才允许引入；候选中最高 star 低于 500 或近两年无维护时停下等确认。AI 凭印象报库名是幻觉依赖的主要来源。
+- **部署形态也是选型的一部分。** 前端属于程序，用 `go:embed` 内嵌；配置属于运行环境，保持外部 YAML。因此最终产物是一个可执行文件加一个配置文件。
+- **不做什么。** 不追求覆盖所有 Go 项目，也不提供脚手架生成器。需求命中清单时给出确定答案，未命中时按上面的流程调研。
 
 ## 包含的技能
 

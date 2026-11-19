@@ -9,3 +9,6 @@
 # OS noise
 .DS_Store
 Thumbs.db
+assets/
+demo-script.md
+promo/

@@ -781,9 +781,12 @@ github.com/go-gorm/gorm
 ```text
 MySQL
 PostgreSQL
+SQLite
 ```
 
 根据项目实际需求选择。
+
+使用 SQLite 时必须采用无 CGO 的 [`ncruces/go-sqlite3`](https://github.com/ncruces/go-sqlite3)（基于 wasm2go）；禁止使用依赖 CGO 的 SQLite 驱动。
 
 架构：
 
@@ -1609,6 +1612,7 @@ uber-go/mock
 * ❌ 生产环境要求单独启动 Vue
 * ❌ Handler 中直接编写复杂业务逻辑
 * ❌ Handler 中直接操作数据库
+* ❌ 使用 SQLite 时采用依赖 CGO 的驱动；统一使用 `ncruces/go-sqlite3`
 * ❌ Service 中处理 HTTP Response
 * ❌ Vue Component 中大量直接调用 Axios
 * ❌ 未经用户要求默认引入补充能力清单中的库
